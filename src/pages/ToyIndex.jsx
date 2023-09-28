@@ -4,11 +4,13 @@ import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service.js'
 import { loadToys, removeToyOptimistic, saveToy } from '../store/actions/toy.actions.js'
 import { ADD_TOY_TO_CART, SET_FILTER_BY } from '../store/reducers/toy.reducer.js'
 import { useEffect } from 'react'
-
+import { ToyFilter } from '../cmps/ToyFilter.jsx'
+import { ToyList } from '../cmps/ToyList.jsx'
 export function ToyIndex() {
 
     const dispatch = useDispatch()
     const toys = useSelector(storeState => storeState.toyModule.toys)
+    console.log(toys);
     const filterBy = useSelector(storeState => storeState.toyModule.filterBy)
     const isLoading = useSelector(storeState => storeState.toyModule.isLoading)
 
@@ -65,26 +67,26 @@ export function ToyIndex() {
     function onSetFilter(filterBy) {
         dispatch({ type: SET_FILTER_BY, filterBy })
     }
-
+    console.log(toys);
     return (
         <div>
             <h3>Toys App</h3>
             <main>
                 <button onClick={onAddToy}>Add Toy 👸🏾</button>
-                {/* <CarFilter filterBy={filterBy} onSetFilter={onSetFilter} /> */}
+                <ToyFilter filterBy={filterBy} onSetFilter={onSetFilter} />
 
-                {/* {!isLoading && <CarList
-                    cars={cars}
-                    onRemoveCar={onRemoveCar}
-                    onEditCar={onEditCar}
+                {!isLoading && <ToyList
+                    toys={toys}
+                    onRemoveToy={onRemoveToy}
+                    onEditToy={onEditToy}
                     addToCart={addToCart}
                     txt={'54'}
-                nums={[1, 2, 3]}
+                    nums={[1, 2, 3]}
                 />
-                } */}
+                }
 
-                {/* {isLoading && <div>Loading...</div>}
-                <hr /> */}
+                {isLoading && <div>Loading...</div>}
+                <hr />
                 {/* <pre>{JSON.stringify(cart, null, 2)}</pre> */}
             </main>
         </div>

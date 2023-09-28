@@ -6,16 +6,17 @@ import { showErrorMsg } from "../services/event-bus.service.js"
 
 export function ToyDetails() {
     const [toy, setToy] = useState(null)
+
     const { toyId } = useParams()
     const navigate = useNavigate()
 
     useEffect(() => {
         loadToy()
-    }, [toyId])
+    })
 
     function loadToy() {
-        toyService.getById(carId)
-            .then((toy) => setToy(toy))
+        toyService.getById(toyId)
+            .then(setToy)
             .catch((err) => {
                 console.log('Had issues in toy details', err)
                 showErrorMsg('Cannot load toy')
@@ -30,7 +31,7 @@ export function ToyDetails() {
             <h5>Price: ${toy.price}</h5>
             <h6>{toy.createdAt}</h6>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi voluptas cumque tempore, aperiam sed dolorum rem! Nemo quidem, placeat perferendis tempora aspernatur sit, explicabo veritatis corrupti perspiciatis repellat, enim quibusdam!</p>
-            <Link to="/toy">Back</Link>
+            {/* <Link to="/toy">Back</Link> */}
         </section>
     )
 }

@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-export function CarPreview({ toy }) {
+export function ToyPreview({ toy }) {
     return (
         <article>
             <h4>{toy.name}</h4>
